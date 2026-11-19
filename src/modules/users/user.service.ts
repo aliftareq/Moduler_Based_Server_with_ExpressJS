@@ -1,9 +1,6 @@
 import { pool } from "../../db";
-import type { IUser } from "./user.interface";
 import bcrypt from "bcryptjs";
-
-
-
+import type { IUser } from "./user.interface";
 
 const createUserIntoDB = async (payload: IUser) => {
   //   console.log(req.body);
@@ -20,7 +17,7 @@ const createUserIntoDB = async (payload: IUser) => {
     `,
     [name, email, hashPassword, age],
   );
-  // console.log(result); 
+  // console.log(result);
   delete result.rows[0].password;
   return result;
 };
@@ -42,7 +39,7 @@ const getSingleUserFromDB = async (id: string) => {
   return result;
 };
 
-const updateUserFromDB = async (payload: any, id: string) => {
+const updateUserFromDB = async (payload: Partial<IUser>, id: string) => {
   const { name, password, age, is_Active } = payload;
 
   const result = await pool.query(
