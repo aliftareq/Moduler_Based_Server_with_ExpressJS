@@ -6,6 +6,8 @@ import express, {
 
 //middleware-imports
 import logger from "./middleware/logger";
+import globalErrorHandler from "./middleware/globalErrorHandler";
+import cors from "cors";
 
 
 //routes-imports
@@ -16,7 +18,12 @@ import { authRoute } from "./modules/auth/auth.route";
 //app initalization
 const app: Application = express();
 
+const corsOptions = {
+  origin: ["http://localhost:3000"],
+  optionsSuccessStatus: 200,
+};
 //response decoding
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
@@ -35,5 +42,8 @@ app.get("/", (req: Request, res: Response) => {
     author: "Alif",
   });
 });
+
+// Global Error Handling Middleware
+app.use(globalErrorHandler);
 
 export default app;

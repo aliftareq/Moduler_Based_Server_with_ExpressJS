@@ -25,7 +25,8 @@ const auth = (...roles: Role[]) => {
         token as string,
         config.jwt_secret,
       ) as JwtPayload;
-      console.log(decode);
+      
+      // console.log(decode);
 
       const user = await pool.query(
         `
