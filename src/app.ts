@@ -8,7 +8,7 @@ import express, {
 import logger from "./middleware/logger";
 import globalErrorHandler from "./middleware/globalErrorHandler";
 import cors from "cors";
-
+import cookieParser from "cookie-parser";
 
 //routes-imports
 import { userRoute } from "./modules/users/user.route";
@@ -24,6 +24,7 @@ const corsOptions = {
 };
 //response decoding
 app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
